@@ -1,21 +1,23 @@
 <?php
 /**
- * Plugin Name: Kirki Controls Example
- * Plugin URI:  https://kirki.org
+ * Plugin Name: Kirki Sample Plugin
+ * Plugin URI:  https://kirki.org/
  * Description: A sample plugin that contains all Kirki & Kirki PRO controls
- * Version:     0.1
+ * Version:     1.0
  * Author:      David Vongries
  * Author URI:  https://wp-pagebuilderframework.com
  */
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-function kirki_controls_examples() {
+function kirki_sample_controls() {
 
+	// Stop here if Kirki doesn't exist.
 	if ( ! class_exists( 'Kirki' ) ) {
 		return;
 	}
 
+	// Config.
 	Kirki::add_config( 'theme_config_id', array(
 		'capability'  => 'edit_theme_options',
 		'option_type' => 'theme_mod',
@@ -26,12 +28,14 @@ function kirki_controls_examples() {
 	// Kirki panel.
 	Kirki::add_panel( 'kirki_panel', array(
 		'priority' => 0,
-		'title'    => __( 'Kirki', 'wpbf' ),
+		'title'    => __( 'Kirki', 'kirki' ),
 	) );
 
-	// Kirki controls.
+	/* Sections */
+
+	// Kirki section.
 	Kirki::add_section( 'kirki_options', array(
-		'title'    => __( 'Controls', 'wpbfpremium' ),
+		'title'    => __( 'Kirki Controls', 'kirki' ),
 		'panel'    => 'kirki_panel',
 		'priority' => 800,
 	) );
@@ -39,11 +43,11 @@ function kirki_controls_examples() {
 	/* Controls */
 
 	// Background
-	Kirki::add_field( 'wpbf', [
+	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'background',
 		'settings'    => 'background_setting',
-		'label'       => esc_html__( 'Background Control', 'kirki' ),
-		'description' => esc_html__( 'Background conrols are pretty complex - but extremely useful if used properly.', 'kirki' ),
+		'label'       => esc_html__( 'Background', 'kirki' ),
+		'description' => esc_html__( 'Background conrols are pretty complex - but extremely useful if used properly. Transport is set to auto for this control so postMessage scripts & frontend CSS is generated automatically and will apply to the body.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => [
 			'background-color'      => '#fff',
@@ -64,7 +68,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'checkbox',
 		'settings'    => 'checkbox_setting',
-		'label'       => esc_html__( 'Checkbox Control', 'kirki' ),
+		'label'       => esc_html__( 'Checkbox', 'kirki' ),
 		'description' => esc_html__( 'Description', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => true,
@@ -73,7 +77,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'code',
 		'settings'    => 'code_setting',
-		'label'       => esc_html__( 'Code Control', 'kirki' ),
+		'label'       => esc_html__( 'Code', 'kirki' ),
 		'description' => esc_html__( 'Description', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '',
@@ -85,8 +89,8 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color',
 		'settings'    => 'color_setting_hex',
-		'label'       => __( 'Color Control (hex-only)', 'kirki' ),
-		'description' => esc_html__( 'This is a color control - without alpha channel.', 'kirki' ),
+		'label'       => __( 'Color (hex only)', 'kirki' ),
+		'description' => esc_html__( 'This is a color control - without alpha channel. Transport is set to auto for this control so postMessage scripts & frontend CSS is generated automatically and will apply to the body.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#0088CC',
 		'transport'   => 'auto',
@@ -101,7 +105,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color',
 		'settings'    => 'color_setting_rgba',
-		'label'       => __( 'Color Control (with alpha channel)', 'kirki' ),
+		'label'       => __( 'Color (alpha)', 'kirki' ),
 		'description' => esc_html__( 'This is a color control - with alpha channel.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#0088CC',
@@ -113,7 +117,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color',
 		'settings'    => 'color_setting_hue',
-		'label'       => __( 'Color Control - hue only.', 'kirki' ),
+		'label'       => __( 'Color (hue only)', 'kirki' ),
 		'description' => esc_html__( 'This is a color control - hue only.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#0088CC',
@@ -122,8 +126,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color-palette',
-		'settings'    => 'color_palette_setting_0',
-		'label'       => esc_html__( 'Color-Palette', 'kirki' ),
+		'settings'    => 'color_palette_setting_1',
+		'label'       => esc_html__( 'Color Palette 1', 'kirki' ),
 		'description' => esc_html__( 'This is a color-palette control', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#888888',
@@ -135,8 +139,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color-palette',
-		'settings'    => 'color_palette_setting_4',
-		'label'       => esc_html__( 'Color-Palette', 'kirki' ),
+		'settings'    => 'color_palette_setting_2',
+		'label'       => esc_html__( 'Color Palette 2', 'kirki' ),
 		'description' => esc_html__( 'Material Design Colors - all', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#F44336',
@@ -148,8 +152,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color-palette',
-		'settings'    => 'color_palette_setting_1',
-		'label'       => esc_html__( 'Color-Palette', 'kirki' ),
+		'settings'    => 'color_palette_setting_3',
+		'label'       => esc_html__( 'Color Palette 3', 'kirki' ),
 		'description' => esc_html__( 'Material Design Colors - primary', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#000000',
@@ -161,8 +165,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color-palette',
-		'settings'    => 'color_palette_setting_2',
-		'label'       => esc_html__( 'Color-Palette', 'kirki' ),
+		'settings'    => 'color_palette_setting_4',
+		'label'       => esc_html__( 'Color Palette 4', 'kirki' ),
 		'description' => esc_html__( 'Material Design Colors - red', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#FF1744',
@@ -174,8 +178,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'color-palette',
-		'settings'    => 'color_palette_setting_3',
-		'label'       => esc_html__( 'Color-Palette', 'kirki' ),
+		'settings'    => 'color_palette_setting_5',
+		'label'       => esc_html__( 'Color Palette 5', 'kirki' ),
 		'description' => esc_html__( 'Material Design Colors - A100', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '#FF80AB',
@@ -189,15 +193,15 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'custom',
 		'settings' => 'custom_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ), // optional
+		// 'label'    => esc_html__( 'This is the label (optional)', 'kirki' ),
 		'section'  => 'kirki_options',
-		'default'  => '<h3 style="padding:15px 10px; background:#fff; margin:0;">' . __( 'Headline', 'wpbfpremium' ) . '</h3>',
+		'default'  => '<h3 style="padding:15px 10px; background:#fff; margin:0;">' . __( 'Custom', 'kirki' ) . '</h3>',
 	] );
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'dashicons',
 		'settings' => 'dashicons_setting',
-		'label'    => esc_html__( 'Dashicons Control', 'kirki' ),
+		'label'    => esc_html__( 'Dashicons', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 'menu',
 	] );
@@ -205,7 +209,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'date',
 		'settings'    => 'date_setting',
-		'label'       => esc_html__( 'Date Control', 'kirki' ),
+		'label'       => esc_html__( 'Date', 'kirki' ),
 		'description' => esc_html__( 'This is a date control.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '',
@@ -214,7 +218,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'dimension',
 		'settings'    => 'dimension_setting',
-		'label'       => esc_html__( 'Dimension Control', 'kirki' ),
+		'label'       => esc_html__( 'Dimension', 'kirki' ),
 		'description' => esc_html__( 'Description Here.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '10px',
@@ -222,8 +226,8 @@ function kirki_controls_examples() {
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'dimensions',
-		'settings'    => 'dimensions_',
-		'label'       => esc_html__( 'Dimension Control', 'kirki' ),
+		'settings'    => 'dimensions_1',
+		'label'       => esc_html__( 'Dimensions 1', 'kirki' ),
 		'description' => esc_html__( 'Description Here.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => [
@@ -235,7 +239,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'dimensions',
 		'settings'    => 'dimensions_2',
-		'label'       => esc_html__( 'Dimension Control', 'kirki' ),
+		'label'       => esc_html__( 'Dimensions 2', 'kirki' ),
 		'description' => esc_html__( 'Description Here.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => [
@@ -249,7 +253,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'dimensions',
 		'settings'    => 'dimensions_3',
-		'label'       => esc_html__( 'Dimension Control', 'kirki' ),
+		'label'       => esc_html__( 'Dimensions 3', 'kirki' ),
 		'description' => esc_html__( 'Description Here.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => [
@@ -279,7 +283,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'editor',
 		'settings'    => 'editor_setting',
-		'label'       => esc_html__( 'My Editor Control', 'kirki' ),
+		'label'       => esc_html__( 'Editor', 'kirki' ),
 		'description' => esc_html__( 'This is an editor control.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '',
@@ -288,7 +292,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'generic',
 		'settings'    => 'generic_setting',
-		'label'       => esc_html__( 'Custom input Control.', 'kirki' ),
+		'label'       => esc_html__( 'Generic', 'kirki' ),
 		'description' => esc_html__( 'The "generic" control allows you to add any input type you want. In this case we use type="password" and define custom styles.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '',
@@ -303,7 +307,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'image',
 		'settings'    => 'image_setting_url',
-		'label'       => esc_html__( 'Image Control', 'kirki' ),
+		'label'       => esc_html__( 'Image', 'kirki' ),
 		'description' => esc_html__( 'Description Here.', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => '',
@@ -312,15 +316,15 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'link',
 		'settings' => 'link_setting',
-		'label'    => __( 'Link Control', 'kirki' ),
+		'label'    => __( 'Link', 'kirki' ),
 		'section'  => 'kirki_options',
-		'default'  => 'https://mapsteps.com/',
+		'default'  => 'https://wp-pagebuilderframework.com/',
 	] );
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'multicheck',
 		'settings' => 'multicheck_setting',
-		'label'    => esc_html__( 'My Control', 'kirki' ),
+		'label'    => esc_html__( 'Multicheck', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => array( 'option-1', 'option-3', 'option-4' ),
 		'choices'  => [
@@ -335,7 +339,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'multicolor',
 		'settings' => 'multicolor_setting',
-		'label'    => esc_html__( 'Label', 'kirki' ),
+		'label'    => esc_html__( 'Multicolor', 'kirki' ),
 		'section'  => 'kirki_options',
 		'priority' => 10,
 		'choices'  => [
@@ -353,7 +357,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'number',
 		'settings' => 'number_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ),
+		'label'    => esc_html__( 'Number', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 42,
 		'choices'  => [
@@ -366,7 +370,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'palette',
 		'settings' => 'palette_setting',
-		'label'    => esc_html__( 'Palette Control', 'kirki' ),
+		'label'    => esc_html__( 'Palette', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 'light',
 		'priority' => 10,
@@ -387,7 +391,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'radio',
 		'settings' => 'radio_setting',
-		'label'    => esc_html__( 'Radio Control', 'kirki' ),
+		'label'    => esc_html__( 'Radio 1', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 'red',
 		'choices'  => [
@@ -400,7 +404,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'radio',
 		'settings' => 'radio_setting_2',
-		'label'    => esc_html__( 'Radio Control', 'kirki' ),
+		'label'    => esc_html__( 'Radio 2', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 'red',
 		'choices'  => [
@@ -422,7 +426,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'radio-buttonset',
 		'settings' => 'radio_buttonset_setting',
-		'label'    => esc_html__( 'Radio-Buttonset Control', 'kirki' ),
+		'label'    => esc_html__( 'Radio Buttonset', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 'red',
 		'choices'  => [
@@ -435,7 +439,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'toggle',
 		'settings' => 'toggle_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ),
+		'label'    => esc_html__( 'Toggle', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => '1',
 	] );
@@ -443,7 +447,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'textarea',
 		'settings' => 'textarea_setting',
-		'label'    => esc_html__( 'Textarea Control', 'kirki' ),
+		'label'    => esc_html__( 'Textarea', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => esc_html__( 'This is a default value', 'kirki' ),
 	] );
@@ -451,14 +455,14 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'text',
 		'settings' => 'text_setting',
-		'label'    => esc_html__( 'Text Control', 'kirki' ),
+		'label'    => esc_html__( 'Text', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => esc_html__( 'This is a default value', 'kirki' ),
 	] );
 
 	Kirki::add_field( 'theme_config_id', [
 		'type'         => 'repeater',
-		'label'        => esc_html__( 'Repeater Control', 'kirki' ),
+		'label'        => esc_html__( 'Repeater', 'kirki' ),
 		'section'      => 'section_id',
 		'priority'     => 10,
 		'row_label'    => [
@@ -473,46 +477,8 @@ function kirki_controls_examples() {
 				'link_url'  => 'https://kirki.org/',
 			],
 			[
-				'link_text' => esc_html__( 'Kirki Repository', 'kirki' ),
-				'link_url'  => 'https://github.com/aristath/kirki',
-			],
-		],
-		'fields'       => [
-			'link_text' => [
-				'type'        => 'text',
-				'label'       => esc_html__( 'Link Text', 'kirki' ),
-				'description' => esc_html__( 'This will be the label for your link', 'kirki' ),
-				'default'     => '',
-			],
-			'link_url'  => [
-				'type'        => 'text',
-				'label'       => esc_html__( 'Link URL', 'kirki' ),
-				'description' => esc_html__( 'This will be the link URL', 'kirki' ),
-				'default'     => '',
-			],
-		],
-	] );
-
-	Kirki::add_field( 'theme_config_id', [
-		'type'         => 'repeater',
-		'label'        => esc_html__( 'Repeater Control', 'kirki' ),
-		'section'      => 'kirki_options',
-		'priority'     => 10,
-		'row_label'    => [
-			'type'  => 'field',
-			'value' => esc_html__( 'Your Custom Value', 'kirki' ),
-			'field' => 'link_text',
-		],
-		'button_label' => esc_html__( '"Add new" button label (optional) ', 'kirki' ),
-		'settings'     => 'my_repeater_setting',
-		'default'      => [
-			[
-				'link_text' => esc_html__( 'Kirki Site', 'kirki' ),
-				'link_url'  => 'https://kirki.org/',
-			],
-			[
-				'link_text' => esc_html__( 'Kirki Repository', 'kirki' ),
-				'link_url'  => 'https://github.com/aristath/kirki',
+				'link_text' => esc_html__( 'Kirki GitHub Repository', 'kirki' ),
+				'link_url'  => 'https://github.com/kirki-framework/kirki',
 			],
 		],
 		'fields'       => [
@@ -534,7 +500,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'        => 'select',
 		'settings'    => 'select_setting',
-		'label'       => esc_html__( 'This is the label', 'kirki' ),
+		'label'       => esc_html__( 'Select', 'kirki' ),
 		'section'     => 'kirki_options',
 		'default'     => 'option-1',
 		'placeholder' => esc_html__( 'Select an option...', 'kirki' ),
@@ -551,7 +517,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'slider',
 		'settings' => 'slider_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ),
+		'label'    => esc_html__( 'Slider', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => 42,
 		'choices'  => [
@@ -564,7 +530,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'sortable',
 		'settings' => 'sortable_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ),
+		'label'    => esc_html__( 'Sortable', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => [
 			'option3',
@@ -584,7 +550,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'switch',
 		'settings' => 'switch_setting',
-		'label'    => esc_html__( 'This is the label', 'kirki' ),
+		'label'    => esc_html__( 'Switch', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => '1',
 		'choices'  => [
@@ -596,7 +562,7 @@ function kirki_controls_examples() {
 	Kirki::add_field( 'theme_config_id', [
 		'type'     => 'typography',
 		'settings' => 'typography_setting',
-		'label'    => esc_html__( 'Control Label', 'kirki' ),
+		'label'    => esc_html__( 'Typography', 'kirki' ),
 		'section'  => 'kirki_options',
 		'default'  => [
 			'font-family'    => 'Roboto',
@@ -611,120 +577,109 @@ function kirki_controls_examples() {
 	] );
 
 }
-add_action( 'init', 'kirki_controls_examples', 100 );
+add_action( 'init', 'kirki_sample_controls', 100 );
 
 // Kirki PRO controls.
-function kirki_pro_control_examples() {
+function kirki_pro_sample_controls() {
 
+	// Stop here if Kirki doesn't exist.
 	if ( ! class_exists( 'Kirki_Pro' ) ) {
 		return;
 	}
 
 	/* Kirki PRO */
 
+	// Reuse Kirki config.
 	Kirki_Pro::use_config( 'theme_config_id' );
 
-	Kirki::add_section(
-		'kirki_section',
-		array(
-			'title'       => esc_html__( 'Experiment', 'kirki' ),
-			'description' => esc_html__( 'Experiment Section.', 'kirki' ),
-			'panel'       => 'kirki_panel',
-			'priority'    => 160,
-		)
-	);
-	Kirki_Pro::add_field(
-		'wpbf',
-		array(
-			'type'       => 'slider',
-			'settings'   => 'default_slider',
-			'label'      => esc_html__( 'Kirki Default Slider', 'kirki' ),
-			'section'    => 'kirki_section',
-			'default'    => 50,
-			'transport'  => 'postMessage',
-			'responsive' => true,
-			'choices'    => array(
-				'min'    => 0,
-				'max'    => 100,
-				'step'   => 1,
-				'suffix' => 'px',
-			),
-			'default'    => array(
-				'desktop' => 60,
-				'tablet'  => 40,
-				'mobile'  => 20,
-			),
-		)
-	);
-	Kirki::add_field(
-		'wpbf',
-		array(
-			'type'      => 'input-slider',
-			'settings'  => 'input_slider',
-			'label'     => esc_html__( 'Kirki Input Slider', 'kirki' ),
-			'section'   => 'kirki_section',
-			'default'   => 30,
-			'transport' => 'postMessage',
-			'choices'   => array(
-				'min'  => 0,
-				'max'  => 100,
-				'step' => 1,
-			),
-		)
-	);
-	Kirki_Pro::add_field(
-		'wpbf',
-		array(
-			'type'       => 'input-slider',
-			'settings'   => 'responsive_input_slider',
-			'label'      => esc_html__( 'Kirki Input Slider', 'kirki' ),
-			'section'    => 'kirki_section',
-			'default'    => 30,
-			'transport'  => 'postMessage',
-			'responsive' => true,
-			'choices'    => array(
-				'min'  => 0,
-				'max'  => 100,
-				'step' => 1,
-			),
-			'default'    => array(
-				'desktop' => '60px',
-				'tablet'  => '40',
-				'mobile'  => '25%',
-			),
-		)
-	);
-	Kirki::add_field(
-		'wpbf',
-		array(
-			'type'        => 'margin',
-			'settings'    => 'margin',
-			'label'       => esc_html__( 'Kirki Margin', 'kirki' ),
-			'description' => esc_html__( 'Setting up margin field using Kirki Margin', 'kirki' ),
-			'section'     => 'kirki_section',
-			'default'     => '25px 15px 0 5px',
-			'transport'   => 'postMessage',
-			'choices'     => array(
-				'save_as' => 'array',
-			),
-		)
-	);
-	Kirki_Pro::add_field(
-		'wpbf',
-		array(
-			'type'       => 'padding',
-			'settings'   => 'padding',
-			'label'      => esc_html__( 'Section Padding', 'kirki' ),
-			'section'    => 'kirki_section',
-			'responsive' => true,
-			'default'    => array(
-				'desktop' => '60px 0',
-				'tablet'  => '40px 0',
-				'mobile'  => '25px 0',
-			),
-			'transport'  => 'postMessage',
-		)
-	);
+	Kirki::add_section( 'kirki_section', array(
+		'title'       => esc_html__( 'Kirki PRO Controls', 'kirki' ),
+		'panel'       => 'kirki_panel',
+		'priority'    => 160,
+	) );
+
+	Kirki_Pro::add_field( 'theme_config_id', array(
+		'type'       => 'slider',
+		'settings'   => 'default_slider',
+		'label'      => esc_html__( 'Slider', 'kirki' ),
+		'description' => esc_html__( 'Reuse Kirki default slider in Kirki PRO', 'kirki' ),
+		'section'    => 'kirki_section',
+		'default'    => 50,
+		'transport'  => 'postMessage',
+		'responsive' => true,
+		'choices'    => array(
+			'min'    => 0,
+			'max'    => 100,
+			'step'   => 1,
+			'suffix' => 'px',
+		),
+		'default'    => array(
+			'desktop' => 60,
+			'tablet'  => 40,
+			'mobile'  => 20,
+		),
+	) );
+
+	Kirki::add_field( 'theme_config_id', array(
+		'type'      => 'input-slider',
+		'settings'  => 'input_slider',
+		'label'     => esc_html__( 'Input Slider', 'kirki' ),
+		'section'   => 'kirki_section',
+		'default'   => 30,
+		'transport' => 'postMessage',
+		'choices'   => array(
+			'min'  => 0,
+			'max'  => 100,
+			'step' => 1,
+		),
+	) );
+
+	Kirki_Pro::add_field( 'theme_config_id', array(
+		'type'       => 'input-slider',
+		'settings'   => 'responsive_input_slider',
+		'label'      => esc_html__( 'Responsive Input Slider', 'kirki' ),
+		'section'    => 'kirki_section',
+		'default'    => 30,
+		'transport'  => 'postMessage',
+		'responsive' => true,
+		'choices'    => array(
+			'min'  => 0,
+			'max'  => 100,
+			'step' => 1,
+		),
+		'default'    => array(
+			'desktop' => '60px',
+			'tablet'  => '40',
+			'mobile'  => '25%',
+		),
+	) );
+
+	Kirki::add_field( 'theme_config_id', array(
+		'type'        => 'margin',
+		'settings'    => 'margin',
+		'label'       => esc_html__( 'Margin', 'kirki' ),
+		'description' => esc_html__( 'Setting up margin field using Kirki Margin', 'kirki' ),
+		'section'     => 'kirki_section',
+		'default'     => '25px 15px 0 5px',
+		'transport'   => 'postMessage',
+		'choices'     => array(
+			'save_as' => 'array',
+		),
+	) );
+
+	Kirki_Pro::add_field( 'theme_config_id', array(
+		'type'       => 'padding',
+		'settings'   => 'padding',
+		'label'      => esc_html__( 'Padding', 'kirki' ),
+		'section'    => 'kirki_section',
+		'responsive' => true,
+		'default'    => array(
+			'desktop' => '60px 0',
+			'tablet'  => '40px 0',
+			'mobile'  => '25px 0',
+		),
+		'transport'  => 'postMessage',
+	) );
 
 }
-add_action( 'init', 'kirki_pro_control_examples', 100 );
+add_action( 'init', 'kirki_pro_sample_controls', 50 );
