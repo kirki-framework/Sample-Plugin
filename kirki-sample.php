@@ -602,7 +602,7 @@ function kirki_pro_sample_controls() {
 		'type'       => 'slider',
 		'settings'   => 'default_slider',
 		'label'      => esc_html__( 'Slider', 'kirki' ),
-		'description' => esc_html__( 'Reuse Kirki default slider in Kirki PRO', 'kirki' ),
+		'description' => esc_html__( 'Experiment where we turn a regular Kirki control into a responsive control (work in progress)', 'kirki' ),
 		'section'    => 'kirki_section',
 		'default'    => 50,
 		'transport'  => 'postMessage',
